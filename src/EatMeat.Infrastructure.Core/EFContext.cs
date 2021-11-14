@@ -1,16 +1,18 @@
-﻿using DotNetCore.CAP;
+﻿using AuthCenter.Domain.Entities;
+using DotNetCore.CAP;
+using EatMeat.Infrastructure.Core;
 using EatMeat.Infrastructure.Core.Extensions;
 using MediatR;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace EatMeat.Infrastructure.Core
 {
-    public class EFContext : DbContext, IUnitOfWork, ITransaction
+    public class EFContext : IdentityDbContext<User, Role, Guid, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>, IUnitOfWork, ITransaction
     {
-        protected IMediator _mediator;
+        IMediator _mediator;
         ICapPublisher _capBus;
-
         public EFContext(DbContextOptions options, IMediator mediator, ICapPublisher capBus) : base(options)
         {
             _mediator = mediator;
@@ -20,15 +22,22 @@ namespace EatMeat.Infrastructure.Core
         #region IUnitOfWork
         public async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default)
         {
-            var result = await base.SaveChangesAsync(cancellationToken);
-            await _mediator.DispatchDomainEventsAsync(this);
-            return true;
+            return await base.SaveChangesAsync(cancellationToken) > 0;
         }
         #endregion
 
         #region ITransaction
 
         private IDbContextTransaction _currentTransaction;
+
+        public EFContext(DbContextOptions options) : base(options)
+        {
+        }
+
+        public EFContext()
+        {
+        }
+
         public IDbContextTransaction GetCurrentTransaction() => _currentTransaction;
         public bool HasActiveTransaction => _currentTransaction != null;
         public Task<IDbContextTransaction> BeginTransactionAsync()

@@ -35,7 +35,7 @@ namespace EatMeat.Infrastructure.Core.Behaviors
                     using (var transaction = await _dbContext.BeginTransactionAsync())
                     using (_logger.BeginScope("TransactionContext:{TransactionId}", transaction.TransactionId))
                     {
-                        _logger.LogInformation("----- 开始事务 {TransactionId} ({@Command})", transaction.TransactionId, typeName, request);
+                        _logger.LogInformation("----- 开始事务 {TransactionId} ({@Command})", transaction.TransactionId, typeName);
 
                         response = await next();
 
