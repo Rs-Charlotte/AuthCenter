@@ -1,10 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace AuthCentier.Infrastructure.Migrations
+namespace AuthCenter.Infrastructure.Migrations.IdentityEntities
 {
     public partial class Init : Migration
     {

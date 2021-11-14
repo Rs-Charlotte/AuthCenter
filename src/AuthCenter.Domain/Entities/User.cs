@@ -1,6 +1,4 @@
-﻿using EatMeat.Domain.Abstractions;
-using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace AuthCenter.Domain.Entities
 {
@@ -11,7 +9,6 @@ namespace AuthCenter.Domain.Entities
             Id = Guid.NewGuid();
             CreateTime = DateTimeOffset.UtcNow;
             UpdateTime = CreateTime;
-
         }
 
         public override Guid Id { get; set; }

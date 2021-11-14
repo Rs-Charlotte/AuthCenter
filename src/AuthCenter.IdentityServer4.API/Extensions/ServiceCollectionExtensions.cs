@@ -1,8 +1,12 @@
 ﻿using AuthCenter.Domain.Entities;
 using AuthCenter.IdentityServer4.API.Application.IntegrationEvents;
 using AuthCenter.Infrastructure;
+using AuthCenter.Infrastructure.Repositories;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace AuthCenter.IdentityServer4.API.Extensions
 {
@@ -49,6 +53,58 @@ namespace AuthCenter.IdentityServer4.API.Extensions
                 });
                 // options.UseDashboard();
             });
+
+            return services;
+        }
+
+        public static IServiceCollection AddCustomAuthentication(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddScoped<UserStore<User, Role, AuthContext, Guid, UserClaim, UserRole, UserLogin, UserToken, RoleClaim>, AppUserStore>();
+            services.AddScoped<RoleStore<Role, AuthContext, Guid, UserRole, RoleClaim>, AppRoleStore>();
+            services.AddScoped<UserManager<User>, AppUserManager>();
+            services.AddScoped<RoleManager<Role>, AppRoleManager>();
+            services.AddScoped<SignInManager<User>, AppSignInManager>();
+
+            services.AddIdentity<User, Role>(option =>
+            {
+                // 安全策略
+                option.Password.RequireLowercase = false;
+                option.Password.RequireNonAlphanumeric = false;
+                option.Password.RequireUppercase = false;
+                option.Password.RequiredLength = 6;
+            })
+                .AddUserStore<AppUserStore>()
+                .AddRoleStore<AppRoleStore>()
+                .AddUserManager<AppUserManager>()
+                .AddRoleManager<AppRoleManager>()
+                .AddSignInManager<AppSignInManager>()
+                .AddEntityFrameworkStores<AuthContext>()
+                .AddDefaultTokenProviders();
+
+            var builder = services.AddIdentityServer(options =>
+            {
+                options.Events.RaiseErrorEvents = true;
+                options.Events.RaiseInformationEvents = true;
+                options.Events.RaiseFailureEvents = true;
+                options.Events.RaiseSuccessEvents = true;
+            })
+                .AddAspNetIdentity<User>()
+                .AddConfigurationStore<AuthConfigurationDbContext>(options =>
+                {
+                    options.ConfigureDbContext = builder =>
+                        builder.UseMySql(configuration.GetConnectionString("MySQLDB"), MySqlServerVersion.LatestSupportedServerVersion, sql => sql.MigrationsAssembly(typeof(AuthConfigurationDbContext).GetTypeInfo().Assembly.GetName().Name));
+                })
+                .AddOperationalStore<AuthPersistedGrantDbContext>(options =>
+                {
+                    options.ConfigureDbContext = builder =>
+                        builder.UseMySql(configuration.GetConnectionString("MySQLDB"), MySqlServerVersion.LatestSupportedServerVersion, sql => sql.MigrationsAssembly(typeof(AuthPersistedGrantDbContext).GetTypeInfo().Assembly.GetName().Name));
+                });
+            //.AddInMemoryIdentityResources(Config.IdentityResources)
+            //.AddInMemoryApiScopes(Config.ApiScopes)
+            //.AddInMemoryClients(Config.Clients);
+
+            // 开发用证书
+            builder.AddDeveloperSigningCredential();
 
             return services;
         }

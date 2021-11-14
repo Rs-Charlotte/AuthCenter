@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="IdentityServer4.EntityFramework" Version="4.1.2" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.0" />
 
     <PackageReference Include="DotNetCore.CAP.RabbitMQ" Version="5.2.0" />
@@ -14,7 +16,10 @@
 
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
 
-    <PackageReference Include="IdentityServer4" Version="4.1.2" />    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.0">
+    <PackageReference Include="IdentityServer4" Version="4.1.2" />
+    <PackageReference Include="IdentityServer4.AspNetIdentity" Version="4.1.2" />
+
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -30,7 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AuthCentier.Infrastructure\AuthCentier.Infrastructure.csproj" />
+    <ProjectReference Include="..\AuthCenter.Infrastructure\AuthCenter.Infrastructure.csproj" />
     <ProjectReference Include="..\EatMeat.Core\EatMeat.Core.csproj" />
   </ItemGroup>
 

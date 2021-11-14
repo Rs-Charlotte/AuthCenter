@@ -1,7 +1,5 @@
 ﻿using AuthCenter.Domain.Entities;
 using DotNetCore.CAP;
-using EatMeat.Infrastructure.Core;
-using EatMeat.Infrastructure.Core.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;

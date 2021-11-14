@@ -8,10 +8,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace AuthCentier.Infrastructure.Migrations
+namespace AuthCenter.Infrastructure.Migrations.IdentityEntities
 {
     [DbContext(typeof(AuthContext))]
-    [Migration("20211114125051_Init")]
+    [Migration("20211114134946_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
