@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 
-namespace AuthCenter.Infrastructure.IdentityManagers
+namespace AuthCenter.Infrastructure.Repositories
 {
     public class AppRoleManager : RoleManager<Role>
     {

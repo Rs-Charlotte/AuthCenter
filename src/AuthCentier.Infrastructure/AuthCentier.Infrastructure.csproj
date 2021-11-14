@@ -14,11 +14,6 @@
     </PackageReference>
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.0" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <Folder Include="EntityConfigurations\" />
-    <Folder Include="Repositories\" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\AuthCenter.Domain\AuthCenter.Domain.csproj" />

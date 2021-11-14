@@ -1,4 +1,5 @@
 ﻿using AuthCenter.Domain.Entities;
+using AuthCenter.Infrastructure.EntityConfigurations;
 using DotNetCore.CAP;
 using EatMeat.Infrastructure.Core;
 using MediatR;
@@ -23,6 +24,9 @@ namespace AuthCenter.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new UserEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new RoleEntityConfiguration());
+
             base.OnModelCreating(modelBuilder);
         }
     }

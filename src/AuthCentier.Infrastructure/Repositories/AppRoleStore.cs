@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace AuthCenter.Infrastructure.IdentityManagers
+namespace AuthCenter.Infrastructure.Repositories
 {
     public class AppRoleStore : RoleStore<Role, DbContext, Guid, UserRole, RoleClaim>
     {

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace AuthCenter.Infrastructure.IdentityManagers
+namespace AuthCenter.Infrastructure.Repositories
 {
     public class AppUserManager : UserManager<User>
     {
