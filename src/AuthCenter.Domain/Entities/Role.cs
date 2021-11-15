@@ -14,7 +14,7 @@ namespace AuthCenter.Domain.Entities
         public Role(string roleName)
         {
             Id = Guid.NewGuid();
-            roleName = Name;
+            Name = roleName;
             CreateTime = DateTimeOffset.UtcNow;
             UpdateTime = CreateTime;
         }
