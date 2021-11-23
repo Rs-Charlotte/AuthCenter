@@ -566,5 +566,4 @@ pnpm-debug.log*
 .vscode
 *.ntvs*
 *.njsproj
-*.sln
 *.sw?
