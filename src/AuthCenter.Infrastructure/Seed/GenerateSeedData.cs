@@ -30,7 +30,6 @@ namespace AuthCenter.Infrastructure.Seed
                 await GenerateIdentitySeedAsync(scope.ServiceProvider);
                 await GenerateIdentityServerSeedAsync(scope.ServiceProvider);
             }
-
         }
 
         private async Task GenerateIdentitySeedAsync(IServiceProvider services)

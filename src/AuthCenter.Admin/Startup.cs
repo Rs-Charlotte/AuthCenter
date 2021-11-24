@@ -1,8 +1,5 @@
-﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
-
-
-using AuthCenter.Admin.Extensions;
+﻿using AuthCenter.Admin.Extensions;
+using AuthCenter.Infrastructure.Seed;
 using Microsoft.EntityFrameworkCore;
 
 namespace AuthCenter.Admin
@@ -28,31 +25,21 @@ namespace AuthCenter.Admin
             services.AddMediatRServices();
             services.AddEventBus(Configuration);
             services.AddCustomAuthentication(Configuration);
-
-            //services.UseAdminUI();
-            //services.AddScoped<IdentityExpressDbContext, SqliteIdentityDbContext>();
         }
 
         public void Configure(IApplicationBuilder app)
         {
             if (Environment.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
+                GenerateSeedData seed = new GenerateSeedData();
+                seed.GenerateSeedDataAsync(app).Wait();
             }
 
-            app.UseDefaultFiles();
             app.UseStaticFiles();
 
             app.UseRouting();
             app.UseIdentityServer();
             app.UseAuthorization();
-
-            //app.UseAdminUI();
 
             app.UseEndpoints(endpoints =>
             {
