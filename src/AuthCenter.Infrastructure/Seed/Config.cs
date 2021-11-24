@@ -47,12 +47,12 @@ namespace AuthCenter.Infrastructure.Seed
                     PostLogoutRedirectUris = { "http://localhost:4200/" },
                     AllowedCorsOrigins =     { "http://localhost:4200" },
 
-                    AllowedScopes = 
+                    AllowedScopes =
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
-                        "FBank", 
-                        "StaticResourceServer" 
+                        "FBank",
+                        "StaticResourceServer"
                     }
                 },
             };
