@@ -35,6 +35,7 @@ namespace AuthCenter.Admin
                 seed.GenerateSeedDataAsync(app).Wait();
             }
 
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
@@ -44,6 +45,7 @@ namespace AuthCenter.Admin
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapFallbackToFile("index.html");
             });
         }
     }

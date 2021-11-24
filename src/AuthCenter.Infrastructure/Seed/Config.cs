@@ -43,9 +43,9 @@ namespace AuthCenter.Infrastructure.Seed
                     AllowedGrantTypes = GrantTypes.Code,
                     RequireClientSecret = false,
 
-                    RedirectUris =           { "https://localhost:4200/callback.html" },
-                    PostLogoutRedirectUris = { "https://localhost:4200/index.html" },
-                    AllowedCorsOrigins =     { "https://localhost:4200" },
+                    RedirectUris =           { "http://localhost:4200/callback.html" },
+                    PostLogoutRedirectUris = { "http://localhost:4200/" },
+                    AllowedCorsOrigins =     { "http://localhost:4200" },
 
                     AllowedScopes = 
                     {
