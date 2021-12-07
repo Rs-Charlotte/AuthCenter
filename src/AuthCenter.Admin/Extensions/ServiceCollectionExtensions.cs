@@ -2,12 +2,11 @@
 using AuthCenter.Domain.Entities;
 using AuthCenter.Infrastructure;
 using AuthCenter.Infrastructure.Repositories;
-using IdentityServer4.Configuration;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace AuthCenter.Admin.Extensions
 {
@@ -82,44 +81,24 @@ namespace AuthCenter.Admin.Extensions
                 .AddEntityFrameworkStores<AuthContext>()
                 .AddDefaultTokenProviders();
 
-            var builder = services.AddIdentityServer(options =>
+            JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
+
+            services.AddAuthentication(options =>
             {
-                options.Events.RaiseErrorEvents = true;
-                options.Events.RaiseInformationEvents = true;
-                options.Events.RaiseFailureEvents = true;
-                options.Events.RaiseSuccessEvents = true;
-
-                options.UserInteraction = new UserInteractionOptions
-                {
-                    LogoutUrl = "/Account/Logout",
-                    LoginUrl = "/Account/Login",
-                    LoginReturnUrlParameter = "returnUrl"
-                };
+                options.DefaultScheme = "Cookies";
+                options.DefaultChallengeScheme = "oidc";
             })
-                .AddAspNetIdentity<User>()
-                // this adds the config data from DB (clients, resources, CORS)
-                .AddConfigurationStore<AuthConfigurationDbContext>(options =>
+                .AddCookie("Cookies")
+                .AddOpenIdConnect("oidc", options =>
                 {
-                    options.ConfigureDbContext = db =>
-                        db.UseMySql(configuration.GetConnectionString("MySQLDB"), MySqlServerVersion.LatestSupportedServerVersion,
-                            sql => sql.MigrationsAssembly(typeof(AuthConfigurationDbContext).GetTypeInfo().Assembly.GetName().Name));
-                })
-                // this adds the operational data from DB (codes, tokens, consents)
-                .AddOperationalStore<AuthPersistedGrantDbContext>(options =>
-                {
-                    options.ConfigureDbContext = db =>
-                        db.UseMySql(configuration.GetConnectionString("MySQLDB"), MySqlServerVersion.LatestSupportedServerVersion,
-                            sql => sql.MigrationsAssembly(typeof(AuthPersistedGrantDbContext).GetTypeInfo().Assembly.GetName().Name));
+                    options.Authority = "https://localhost:5001";
 
-                    // this enables automatic token cleanup. this is optional.
-                    options.EnableTokenCleanup = true;
-                    // options.TokenCleanupInterval = 15; // interval in seconds. 15 seconds useful for debugging
+                    options.ClientId = "mvc";
+                    options.ClientSecret = "secret";
+                    options.ResponseType = "code";
+
+                    options.SaveTokens = true;
                 });
-
-            // 开发用证书
-            builder.AddDeveloperSigningCredential();
-
-            services.AddAuthentication();
 
             return services;
         }

@@ -35,26 +35,7 @@ namespace AuthCenter.Infrastructure.Seed
         {
             return new List<Client>
             {
-                new Client
-                {
-                    ClientId = "Login",
-                    ClientName = "Login SPA Client",
-
-                    AllowedGrantTypes = GrantTypes.Code,
-                    RequireClientSecret = false,
-
-                    RedirectUris =           { "http://localhost:4200/callback.html" },
-                    PostLogoutRedirectUris = { "http://localhost:4200/" },
-                    AllowedCorsOrigins =     { "http://localhost:4200" },
-
-                    AllowedScopes =
-                    {
-                        IdentityServerConstants.StandardScopes.OpenId,
-                        IdentityServerConstants.StandardScopes.Profile,
-                        "FBank",
-                        "StaticResourceServer"
-                    }
-                },
+                
             };
         }
     }
