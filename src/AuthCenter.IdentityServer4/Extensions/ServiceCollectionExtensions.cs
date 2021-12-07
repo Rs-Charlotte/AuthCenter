@@ -89,15 +89,28 @@ namespace AuthCenter.IdentityServer4.Extensions
                 options.Events.RaiseSuccessEvents = true;
             })
                 .AddAspNetIdentity<User>()
+                .AddResourceOwnerValidator<ResourceOwnerPasswordValidator>()
                 .AddConfigurationStore<AuthConfigurationDbContext>(options =>
                 {
                     options.ConfigureDbContext = builder =>
-                        builder.UseMySql(configuration.GetConnectionString("MySQLDB"), MySqlServerVersion.LatestSupportedServerVersion, sql => sql.MigrationsAssembly(typeof(AuthConfigurationDbContext).GetTypeInfo().Assembly.GetName().Name));
+                        builder.UseMySql(configuration.GetConnectionString("MySQLDB"),
+                        MySqlServerVersion.LatestSupportedServerVersion,
+                        sql =>
+                        {
+                            sql.MigrationsAssembly(typeof(AuthConfigurationDbContext).GetTypeInfo().Assembly.GetName().Name);
+                            sql.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
+                        });
                 })
                 .AddOperationalStore<AuthPersistedGrantDbContext>(options =>
                 {
                     options.ConfigureDbContext = builder =>
-                        builder.UseMySql(configuration.GetConnectionString("MySQLDB"), MySqlServerVersion.LatestSupportedServerVersion, sql => sql.MigrationsAssembly(typeof(AuthPersistedGrantDbContext).GetTypeInfo().Assembly.GetName().Name));
+                        builder.UseMySql(configuration.GetConnectionString("MySQLDB"),
+                        MySqlServerVersion.LatestSupportedServerVersion,
+                        sql =>
+                        {
+                            sql.MigrationsAssembly(typeof(AuthPersistedGrantDbContext).GetTypeInfo().Assembly.GetName().Name);
+                            sql.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
+                        });
                 });
             //.AddInMemoryIdentityResources(Config.IdentityResources)
             //.AddInMemoryApiScopes(Config.ApiScopes)

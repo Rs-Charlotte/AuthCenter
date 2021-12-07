@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AuthCenter.Infrastructure.Migrations.IdentityEntities
 {
     [DbContext(typeof(AuthContext))]
-    [Migration("20211114134946_Init")]
+    [Migration("20211207090648_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

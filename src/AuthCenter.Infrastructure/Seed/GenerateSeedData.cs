@@ -31,7 +31,7 @@ namespace AuthCenter.Infrastructure.Seed
         {
             await services.GetService<AuthContext>().Database.MigrateAsync();
 
-            if (!await _roleManager.RoleExistsAsync("Admin"))
+             if (!await _roleManager.RoleExistsAsync("Admin"))
             {
                 var role = new Role("Admin");
                 var result = await _roleManager.CreateAsync(role);
@@ -44,7 +44,7 @@ namespace AuthCenter.Infrastructure.Seed
             if (await _userManager.FindByNameAsync("Admin") == null)
             {
                 var defaultUser = new User() { UserName = "Admin", SecurityStamp = "Admin" };
-                var result = await _userManager.CreateAsync(defaultUser, "admin@123");
+                var result = await _userManager.CreateAsync(defaultUser, "Admin123123@");
                 if (!result.Succeeded)
                 {
                     throw new Exception("初始化默认用户失败");
@@ -96,6 +96,8 @@ namespace AuthCenter.Infrastructure.Seed
                 }
                 await configurationDbContext.SaveChangesAsync();
             }
+
+            _logger.LogInformation("初始化IdentityServer4成功");
         }
     }
 }

@@ -25,4 +25,10 @@
     <ProjectReference Include="..\EatMeat.Infrastructure.Core\EatMeat.Infrastructure.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\Configuration\" />
+    <Folder Include="Migrations\IdentityEntities\" />
+    <Folder Include="Migrations\PersistedGrant\" />
+  </ItemGroup>
+
 </Project>

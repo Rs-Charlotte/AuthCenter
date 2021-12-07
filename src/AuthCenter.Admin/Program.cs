@@ -1,5 +1,4 @@
 using AuthCenter.Admin.Extensions;
-using AuthCenter.Infrastructure.Seed;
 
 Console.Title = "AuthCenter.IdentityServer4";
 
@@ -19,9 +18,6 @@ services.AddEventBus(configuration);
 services.AddCustomAuthentication(configuration);
 
 var app = builder.Build();
-
-GenerateSeedData seed = new GenerateSeedData();
-seed.GenerateSeedDataAsync(app).Wait();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

@@ -93,8 +93,8 @@ namespace AuthCenter.Admin.Extensions
                 {
                     options.Authority = "https://localhost:5001";
 
-                    options.ClientId = "mvc";
-                    options.ClientSecret = "secret";
+                    options.ClientId = "is4admin";
+                    options.ClientSecret = "zzxfkme";
                     options.ResponseType = "code";
 
                     options.SaveTokens = true;

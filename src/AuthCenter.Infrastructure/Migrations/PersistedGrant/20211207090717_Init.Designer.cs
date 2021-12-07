@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AuthCenter.Infrastructure.Migrations.PersistedGrant
 {
     [DbContext(typeof(AuthPersistedGrantDbContext))]
-    [Migration("20211114140315_Init")]
+    [Migration("20211207090717_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
