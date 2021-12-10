@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Text;
 
-namespace FBank.Infrastructure.Models
+namespace EatMeat.Core.Common.Result
 {
     public class MessageModel : ActionResult, IStatusCodeActionResult, IActionResult
     {

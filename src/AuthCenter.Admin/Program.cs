@@ -1,4 +1,5 @@
 using AuthCenter.Admin.Extensions;
+using Newtonsoft.Json;
 
 Console.Title = "AuthCenter.IdentityServer4";
 
@@ -9,6 +10,16 @@ var configuration = builder.Configuration;
 // Add services to the container.
 services.AddControllers();
 services.AddSwaggerGen();
+
+services.AddCors(options =>
+{
+    options.AddPolicy("cors", builder => 
+    { 
+        builder.AllowAnyOrigin()
+               .AllowAnyHeader()
+               .AllowAnyMethod(); 
+    });
+});
 
 services.AddMySqlDomainContext(configuration.GetConnectionString("MySQLDB"));
 services.AddRepositories();
@@ -27,6 +38,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseStaticFiles();
+
+app.UseCors("cors");
 
 app.UseRouting();
 app.UseAuthentication();

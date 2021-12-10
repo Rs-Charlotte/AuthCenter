@@ -39,6 +39,13 @@ namespace AuthCenter.Infrastructure.Seed
                 {
                     throw new Exception("初始化角色失败：" + result.Errors.SelectMany(x => x.Description));
                 }
+
+                var role2 = new Role("user");
+                var result2 = await _roleManager.CreateAsync(role2);
+                if (!result2.Succeeded)
+                {
+                    throw new Exception("初始化角色失败：" + result2.Errors.SelectMany(x => x.Description));
+                }
             }
 
             if (await _userManager.FindByNameAsync("Admin") == null)

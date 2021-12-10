@@ -9,6 +9,7 @@ namespace AuthCenter.Domain.Entities
             Id = Guid.NewGuid();
             CreateTime = DateTimeOffset.UtcNow;
             UpdateTime = CreateTime;
+            IsDeleted = false;
         }
 
         public override Guid Id { get; set; }
@@ -26,6 +27,7 @@ namespace AuthCenter.Domain.Entities
         public override int AccessFailedCount { get; set; }
         public override bool LockoutEnabled { get; set; }
         public override DateTimeOffset? LockoutEnd { get; set; }
+        public bool IsDeleted { get; set; }
         public DateTimeOffset CreateTime { get; set; }
         public DateTimeOffset UpdateTime { get; set; }
     }

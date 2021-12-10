@@ -1,26 +1,26 @@
-﻿namespace FBank.Infrastructure.Models
+﻿namespace EatMeat.Core.Common.Result
 {
     public class PageModel<T>
     {
         /// <summary>
-        /// 当前页标
+        /// 当前页
         /// </summary>
-        public int page { get; set; } = 1;
+        public int PageIndex { get; set; }
         /// <summary>
         /// 总页数
         /// </summary>
-        public int pageCount { get; set; } = 6;
+        public int TotalPages { get; set; }
         /// <summary>
-        /// 数据总数
+        /// 查询集合总个数
         /// </summary>
-        public int dataCount { get; set; } = 0;
+        public int TotalItems { get; set; }
         /// <summary>
-        /// 每页大小
+        /// 每页项数     
         /// </summary>
-        public int PageSize { set; get; }
+        public int PageSize { get; set; }
         /// <summary>
-        /// 返回数据
+        /// 查询集合
         /// </summary>
-        public List<T> data { get; set; }
+        public IList<T> Items { get; set; }
     }
 }

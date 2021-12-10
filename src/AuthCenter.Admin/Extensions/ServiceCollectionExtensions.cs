@@ -57,6 +57,12 @@ namespace AuthCenter.Admin.Extensions
             return services;
         }
 
+        public static IServiceCollection AddCustomJsonOptions(this IServiceCollection services)
+        {
+
+            return services;
+        }
+
         public static IServiceCollection AddCustomAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<UserStore<User, Role, AuthContext, Guid, UserClaim, UserRole, UserLogin, UserToken, RoleClaim>, AppUserStore>();
