@@ -42,5 +42,19 @@ namespace AuthCenter.Admin.Controllers
                 return BadRequest(res.Errs);
             }
         }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteUser([FromQuery] UserDeleteCommand cmd)
+        {
+            var res = await _mediator.Send(cmd);
+            return Ok(res);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateUser([FromQuery] UserUpdateCommand cmd)
+        {
+            var res = await _mediator.Send(cmd);
+            return Ok(res);
+        }
     }
 }

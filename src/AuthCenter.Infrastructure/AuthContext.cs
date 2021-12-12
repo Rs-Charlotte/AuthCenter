@@ -18,10 +18,12 @@ namespace AuthCenter.Infrastructure
         public override DbSet<RoleClaim> RoleClaims { get; set; }
         public override DbSet<UserLogin> UserLogins { get; set; }
         public override DbSet<UserToken> UserTokens { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //modelBuilder.ApplyConfiguration(new UserEntityConfiguration());
             //modelBuilder.ApplyConfiguration(new RoleEntityConfiguration());
+
 
             base.OnModelCreating(modelBuilder);
         }
